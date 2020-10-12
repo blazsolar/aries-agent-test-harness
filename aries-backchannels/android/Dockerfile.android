@@ -2,10 +2,10 @@
 FROM us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2 AS base
 
 FROM kaminomobile/android-platform-30:1 as build
-WORKDIR /home/jenkins
+WORKDIR /home/jenkins/harnes
 COPY android/server/ ./
 RUN ls
-RUN PWD
+RUN pwd
 RUN ./gradlew assembleDebug
 
 FROM base AS final
