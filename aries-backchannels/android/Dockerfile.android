@@ -7,6 +7,7 @@ COPY android/server/ ./
 RUN ls
 RUN pwd
 RUN df -H
+RUN whoami
 RUN ./gradlew assembleDebug
 
 FROM base AS final
