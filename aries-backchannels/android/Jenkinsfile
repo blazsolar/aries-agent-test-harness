@@ -46,16 +46,16 @@ pipeline {
                         sh "echo \"Node: ${NODE_NAME}\""
                         script {
                             withDockerNetwork { n ->
-                                                    docker.build('test-harnes', "--build-arg hostUid=\$(id -u) --build-arg hostGid=\$(id -g) -f aries-backchannels/android/Dockerfile.android ./aries-backchannels")
-                                                            .inside("-v \$HOME/.gradle:/home/jenkins/.gradle --ip=\"10.0.0.4\" --net=$n") {
-                                                                dir("wrappers/android") {
-                                                                    sh "sleep 10 && adb connect 10.0.0.3:5555"
-                                                                    // Wait 10 seconds before connecting to device so we make sure docker image & emulator is spun up
-                                                                    sh "wait-for-emulator"
-                                                                    // connected check cannot run in parallel.
-                                                                    sh "./gradlew connectedAndroidTest --console=verbose --no-daemon -Pandroid.builder.sdkDownload=false || adb logcat -d"
-                                                                }
-                                                            }
+                                docker.build('test-harnes', "--build-arg hostUid=\$(id -u) --build-arg hostGid=\$(id -g) -f aries-backchannels/android/Dockerfile.android ./aries-backchannels")
+                                        .inside("-v \$HOME/.gradle:/home/jenkins/.gradle --ip=\"10.0.0.4\" --net=$n") {
+                                            dir("wrappers/android") {
+                                                sh "sleep 10 && adb connect 10.0.0.3:5555"
+                                                // Wait 10 seconds before connecting to device so we make sure docker image & emulator is spun up
+                                                sh "wait-for-emulator"
+                                                // connected check cannot run in parallel.
+                                                sh "./gradlew connectedAndroidTest --console=verbose --no-daemon -Pandroid.builder.sdkDownload=false || adb logcat -d"
+                                            }
+                                        }
 
                             }
                         }

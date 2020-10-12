@@ -6,6 +6,7 @@ WORKDIR /home/jenkins/harnes
 COPY android/server/ ./
 RUN ls
 RUN pwd
+RUN df -H
 RUN ./gradlew assembleDebug
 
 FROM base AS final
