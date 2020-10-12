@@ -50,6 +50,7 @@ pipeline {
                                         .inside("-v \$HOME/.gradle:/home/jenkins/.gradle --ip=\"10.0.0.4\" --net=$n") {
                                             sh "pwd"
                                             sh "ls -lah"
+                                            hs "ls -lah /"
                                         }
 
                             }
