@@ -49,7 +49,7 @@ pipeline {
                                 docker.build('test-harnes', "--build-arg hostUid=\$(id -u) --build-arg hostGid=\$(id -g) -f aries-backchannels/android/Dockerfile.android ./aries-backchannels")
                                         .inside("-v \$HOME/.gradle:/home/jenkins/.gradle --ip=\"10.0.0.4\" --net=$n") {
                                             dir("wrappers/android") {
-                                                wh "whoami"
+                                                sh "whoami"
                                                 // Wait 10 seconds before connecting to device so we make sure docker image & emulator is spun up
                                                 sh "wait-for-emulator"
                                                 // connected check cannot run in parallel.
