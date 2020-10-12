@@ -9,5 +9,5 @@ RUN ./gradlew assembleDebug -S
 
 FROM base AS final
 WORKDIR /
-COPY --from=build /app/build/outputs/apk/debug/app-debug.apk .
+COPY --from=build app/build/outputs/apk/debug/app-debug.apk .
 # ENTRYPOINT ["dotnet", "DotNet.Backchannel.dll"]
