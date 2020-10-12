@@ -23,7 +23,7 @@ pipeline {
     parameters {
         choice(name: 'emulatorVersion', choices: ['30-google-x64', '29-google-x64', '28-playstore-x64'], description: 'Emulator version')
     }
-    
+
     options { timeout(time: 2, unit: 'HOURS') }
 
     stages {
@@ -46,7 +46,7 @@ pipeline {
                         sh "echo \"Node: ${NODE_NAME}\""
                         script {
                             withDockerNetwork { n ->
-                                                    docker.build('test-harnes', "--build-arg hostUid=\$(id -u) --build-arg hostGid=\$(id -g) aries-backchannels/android/Dockerfile.android ./aries-backchannels")
+                                                    docker.build('test-harnes', "--build-arg hostUid=\$(id -u) --build-arg hostGid=\$(id -g) -f aries-backchannels/android/Dockerfile.android ./aries-backchannels")
                                                             .inside("-v \$HOME/.gradle:/home/jenkins/.gradle --ip=\"10.0.0.4\" --net=$n") {
                                                                 dir("wrappers/android") {
                                                                     sh "sleep 10 && adb connect 10.0.0.3:5555"
