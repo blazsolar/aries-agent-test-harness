@@ -8,6 +8,11 @@ RUN ls -lah
 RUN pwd
 RUN df -H
 RUN whoami
+RUN ./gradlew
+RUN ls -lah
+RUN pwd
+RUN df -H
+RUN whoami
 RUN ./gradlew assembleDebug -S
 
 FROM base AS final
