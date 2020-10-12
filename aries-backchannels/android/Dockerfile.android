@@ -1,0 +1,12 @@
+# Final image needs indy
+FROM us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2 AS base
+
+FROM kaminomobile/android-platform-30:1 as build
+WORKDIR /home/jenkins
+COPY android/server/ ./
+RUN ./gradlew assembleDebug
+
+FROM base AS final
+WORKDIR /
+COPY --from=build /app/build/outputs/apk/debug/app-debug.apk .
+# ENTRYPOINT ["dotnet", "DotNet.Backchannel.dll"]
