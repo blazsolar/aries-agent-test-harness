@@ -23,11 +23,7 @@ pipeline {
     parameters {
         choice(name: 'emulatorVersion', choices: ['30-google-x64', '29-google-x64', '28-playstore-x64'], description: 'Emulator version')
     }
-
-    triggers {
-        parameterizedCron(env.BRANCH_NAME.startsWith("develop") ? '0 4 * * * % lintTask=true;cleanTests=true;notifyFailure=true' : '')
-    }
-
+    
     options { timeout(time: 2, unit: 'HOURS') }
 
     stages {
