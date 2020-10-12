@@ -4,7 +4,7 @@ FROM us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2 AS ba
 FROM kaminomobile/android-platform-30:1 as build
 WORKDIR /home/jenkins/harnes
 COPY android/server/ ./
-RUN ls
+RUN ls -lah
 RUN pwd
 RUN df -H
 RUN whoami
